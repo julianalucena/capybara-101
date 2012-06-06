@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<% if current_user.friendship_for(@user) %>
+  <% if current_user.friends?(@user) %>
+    <p>You and <%= @user.email %> are friends</p>
+  <% else %>
+    <p>Waiting for <%= @user.email %> approval</p>
+  <% end %>
+<% else %>
+  <%= link_to "Add as a friend", friendships_path(:friend_id => @user.to_param, :be_friends => true), :method => :post %>
+<% end %>
+
+<p><%= @user.email %></p>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
